@@ -12,5 +12,3 @@ class Todo(models.Model):
             on_delete=models.CASCADE,
             default=None
         )
-        
-        # Create your models here.
