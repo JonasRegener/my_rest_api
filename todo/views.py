@@ -9,6 +9,6 @@ class TodoViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Todo.objects.all().order_by('title')
+    queryset = Todo.objects.all().order_by('-title')
     serializer_class = TodoSerializer
     permission_classes = [] #permissions.IsAuthenticated
