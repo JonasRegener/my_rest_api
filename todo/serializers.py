@@ -7,13 +7,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'email'] #  'user'
+        fields = ['id', 'email'] #  'user', 'first_name', 'last_name'
 
 class TodoSerializer(serializers.HyperlinkedModelSerializer):
 
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     class Meta:
         model = Todo
-        fields = ['id', 'title', 'description', 'created_at', 'user', 'time_passed']
+        fields = ['id', 'title', 'description', 'due_date', 'user',  'category'] #'time_passed',
 
 
