@@ -13,15 +13,25 @@ class Todo(models.Model):
     ('S', 'Sales'),
     ('-', 'None')
 ]
+    PRIO_CATEGORY_CHOICES = [
+    ('H', 'High'),
+    ('M', 'Medium'),
+    ('L', 'Low')
+]
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=300)
-    due_date = models.DateField(default=datetime.date.today)
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        default=None
-    )
     category = models.CharField(max_length=10,choices=TODO_CATEGORY_CHOICES, default='None')
+    priority = models.CharField(max_length=15,choices=PRIO_CATEGORY_CHOICES, default='Low')
+    user = models.CharField(max_length=120, default='None')
+    due_date = models.CharField(max_length=10, default='01-01-2000')
+
+
+# user = models.ForeignKey(
+#       User,
+#       on_delete=models.CASCADE,
+#       default=None
+#   )
+
     # due_date = models.DateField(default=datetime.timedelta(days=1))
  #   def time_passed(self):
  #       today = date.today()

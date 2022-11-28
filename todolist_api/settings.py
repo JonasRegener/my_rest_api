@@ -138,3 +138,7 @@ MEDIA_ROOT = '/home/jonas34/todolist_api/media'
 MEDIA_URL = '/media/'
 STATIC_ROOT = '/home/jonas34/todolist_api/static'
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DATE_INPUT_FORMATS': ['%m/%d/%Y'],
+}
