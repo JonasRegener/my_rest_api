@@ -3,6 +3,7 @@ from rest_framework import serializers, fields
 from .models import Todo, User
 
 
+        
 
 class TodoSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -10,7 +11,19 @@ class TodoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Todo
-        fields = ['id', 'title', 'description',  'category', 'priority',  'user','due_date'] 
+        fields = ['id', 'title', 'description',  'category', 'priority',  'user','due_date', 'status',] #  'subtasks'
+
+
+
+
+
+#""" class SubtasksSerializer(serializers.HyperlinkedModelSerializer):
+#
+#    subtasks = serializers.PrimaryKeyRelatedField()
+#
+#    class Meta:
+#        model = Subtask """
+        
 
 
 #class UserSerializer(serializers.HyperlinkedModelSerializer):

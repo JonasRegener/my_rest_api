@@ -5,6 +5,7 @@ from .models import Todo
 from .serializers import TodoSerializer
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+import json
 
 
 # Create your views here.
@@ -15,15 +16,18 @@ class TodoViewSet(viewsets.ModelViewSet):
     permission_classes = [] #permissions.IsAuthenticated
     
     def create(self, request):
-        todo = Todo.objects.create(title = request.POST.get('title', ''),
+        todo = Todo.objects.create(title = request.GET.get('title'),
                                     description = request.POST.get('description', ''), 
                                     category = request.POST.get('category', 'none'),
                                     priority = request.POST.get('priority', 'low'),
                                     user= request.POST.get('user', ''),
-                                    due_date= request.POST.get('due_date','01-01-2000')
+                                    due_date= request.POST.get('due_date','01-01-2000'),
+                                    status= request.POST.get('status', 'To do'),
+                                    
                                     )
         serzialized_obj = serializers.serialize('json', [todo, ])
         return HttpResponse(serzialized_obj, content_type='application/json')
+
 
 """ class UserViewSet(viewsets.UserViewSet):
     def list(self, request):
