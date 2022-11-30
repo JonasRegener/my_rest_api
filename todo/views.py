@@ -15,7 +15,7 @@ class TodoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
     
     def create(self, request):
-        todo = Todo.objects.create(title = request.GET.get('title', ''),
+        todo = Todo.objects.create(title = request.GET.get('title',''),
                                     description = request.POST.get('description', ''), 
                                     category = request.POST.get('category', 'none'),
                                     priority = request.POST.get('priority', 'low'),
@@ -28,11 +28,11 @@ class TodoViewSet(viewsets.ModelViewSet):
         return HttpResponse(serzialized_obj, content_type='application/json')
 
 class SubtaskViewSet(viewsets.ModelViewSet): 
-    queryset = Subtask.objects.all().order_by('-task')
+    queryset = Subtask.objects.all().order_by('-todo')
     serializer_class = SubtaskSerializer
 
     def create(self, request):
-        subtask = Subtask.objects.create(task= Todo.objects.get(),
+        subtask = Subtask.objects.create(todo= Todo.objects.first(),
                                             title = request.GET.get('title', ''),
                                             done = request.GET.get('done', 'False'),
 

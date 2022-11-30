@@ -6,20 +6,22 @@ from .models import Todo, User, Subtask
         
 
 class TodoSerializer(serializers.HyperlinkedModelSerializer):
-
+    
     due_date = fields.DateField(input_formats=['%m/%d/%Y'])
 
     class Meta:
         model = Todo
-        fields = ['id', 'title', 'description',  'category', 'priority',  'user','due_date', 'status',] #  'subtasks'
+        fields = ['id', 'title', 'description',  'category', 'priority',  'user','due_date', 'status', 'subtasks'] #  'subtasks'
+
+
 
 class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
-
+    todo = TodoSerializer
     
-
     class Meta:
+
         model = Subtask
-        fields = ['id', 'title', 'task', 'done' ] #  'subtasks'
+        fields = ['id', 'title', 'todo', 'done' ] #  'subtasks'
 
 
 
