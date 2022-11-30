@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers, fields
-from .models import Todo, User
+from .models import Todo, User, Subtask
 
 
         
@@ -12,6 +12,14 @@ class TodoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Todo
         fields = ['id', 'title', 'description',  'category', 'priority',  'user','due_date', 'status',] #  'subtasks'
+
+class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
+
+    
+
+    class Meta:
+        model = Subtask
+        fields = ['id', 'title', 'task', 'done' ] #  'subtasks'
 
 
 
