@@ -31,13 +31,15 @@ class Todo(models.Model):
     user = models.CharField(max_length=120, default='None')
     due_date = models.CharField(max_length=10, default='01-01-2000')
     status = models.CharField(max_length=17,choices=STATUS_CATEGORY_CHOICES, default= 'To do')
+    subtasks = models.ManyToManyField('Subtask')
     
 
 
 class Subtask(models.Model):
     title = models.CharField(max_length=30)
     done = models.BooleanField(default= False)
-    todo = models.ForeignKey(Todo, on_delete=models.CASCADE)
+
+#    todo = models.ForeignKey(Todo, on_delete=models.CASCADE)
 
 
 

@@ -22,7 +22,7 @@ class TodoViewSet(viewsets.ModelViewSet):
                                     user= request.POST.get('user', ''),
                                     due_date= request.POST.get('due_date','01-01-2000'),
                                     status= request.POST.get('status', 'To do'),
-                                    
+                                    subtasks= request.POST.get('subtasks')
                                     )
         serzialized_obj = serializers.serialize('json', [todo, ])
         return HttpResponse(serzialized_obj, content_type='application/json')
