@@ -15,26 +15,25 @@ class TodoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
     
     def create(self, request):
-        todo = Todo.objects.create(title = request.GET.get('title',''),
+        todo = Todo.objects.create(title = request.POST.get('title',''),
                                     description = request.POST.get('description', ''), 
                                     category = request.POST.get('category', 'none'),
                                     priority = request.POST.get('priority', 'low'),
                                     user= request.POST.get('user', ''),
                                     due_date= request.POST.get('due_date','01-01-2000'),
                                     status= request.POST.get('status', 'To do'),
-                                    subtasks= request.POST.get('subtasks')
+                                    subtasks= request.POST.get('subtasks', 'abc'),
                                     )
         serzialized_obj = serializers.serialize('json', [todo, ])
         return HttpResponse(serzialized_obj, content_type='application/json')
 
 class SubtaskViewSet(viewsets.ModelViewSet): 
-    queryset = Subtask.objects.all().order_by('-todo')
+    queryset = Subtask.objects.all().order_by('-title')
     serializer_class = SubtaskSerializer
 
     def create(self, request):
-        subtask = Subtask.objects.create(todo= Todo.objects.first(),
-                                            title = request.GET.get('title', ''),
-                                            done = request.GET.get('done', 'False'),
+        subtask = Subtask.objects.create(title = request.POST.get('title', ''),
+                                            done = request.POST.get('done', bool),
 
         )
         serzialized_subtask = serializers.serialize('json', [subtask, ])

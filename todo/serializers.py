@@ -2,11 +2,11 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers, fields
 from .models import Todo, User, Subtask
 
-class SubtaskSerializer(serializers.ModelSerializer):
+class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = Subtask
-        fields = [ 'title', 'done' ] #  'subtasks'
+        fields = [ 'id', 'title', 'done' ] #  'subtasks'
 
 class TodoSerializer(serializers.HyperlinkedModelSerializer):
     
