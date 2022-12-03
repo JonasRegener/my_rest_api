@@ -2,19 +2,21 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers, fields
 from .models import Todo, User, Subtask
 
-class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
+class SubtaskSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Subtask
-        fields = [ 'id', 'title', 'done' ] #  'subtasks'
+        fields = [ 'id', 'title' ] #  'subtasks'
 
 class TodoSerializer(serializers.HyperlinkedModelSerializer):
     
     due_date = fields.DateField(input_formats=['%m/%d/%Y'])
-    subtasks = SubtaskSerializer(read_only=True, many=True)
+    subtasks = SubtaskSerializer(many=True, read_only=False)
     class Meta:
         model = Todo
         fields = ['id', 'title', 'description',  'category', 'priority',  'user','due_date', 'status', 'subtasks'] #  'subtasks'
+    
+    
 
 
 
