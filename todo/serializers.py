@@ -16,31 +16,3 @@ class TodoSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Todo
         fields = ['id', 'title', 'description',  'category', 'priority',  'user','due_date', 'status', 'subtasks'] #  'subtasks'
-    
-    
-
-
-
-
-
-
-
-
-
-#""" class SubtasksSerializer(serializers.HyperlinkedModelSerializer):
-#
-#    subtasks = serializers.PrimaryKeyRelatedField()
-#
-#    class Meta:
-#        model = Subtask """
-        
-
-
-#class UserSerializer(serializers.HyperlinkedModelSerializer):
-#
-#   class Meta:
-#       model = User
-#       fields = ['id', 'email'] #  'user', 'first_name', 'last_name'
-
-
-#     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())

@@ -57,16 +57,3 @@ class SubtaskViewSet(viewsets.ModelViewSet):
         serzialized_subtask = serializers.serialize('json', [subtask, ])
         return HttpResponse(serzialized_subtask, content_type='application/json')
         
-
-
-""" class UserViewSet(viewsets.UserViewSet):
-    def list(self, request):
-        queryset = User.objects.all()
-        serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = User.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = UserSerializer(user)
-        return Response(serializer.data) """

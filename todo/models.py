@@ -39,32 +39,3 @@ class Todo(models.Model):
     due_date = models.CharField(max_length=10, default='01-01-2000')
     status = models.CharField(max_length=17,choices=STATUS_CATEGORY_CHOICES, default= 'To do')
     subtasks = models.ManyToManyField(Subtask, default=None)
-#    todo = models.ForeignKey(Todo, on_delete=models.CASCADE)
-
-
-
-
-# finished? = models.BooleanField(default=False)
-# oder 5ter status
-
-
-# user = models.ForeignKey(
-#       User,
-#       on_delete=models.CASCADE,
-#       default=None
-#   )
-
-    # due_date = models.DateField(default=datetime.timedelta(days=1))
- #   def time_passed(self):
- #       today = date.today()
- #       dif = today - self.created_at
- #       return dif.days
-
-""" 
-class User(models.Model):
-    email = models.CharField(max_length=30, blank=True)
-    password = models.CharField(max_length=30, blank=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-
-     """
