@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 from .models import Subtask, Category, Todo
 import json
 
+
 class TestSubtask(TestCase):
     def est_testhomepage(self):
         self.client = Client()
-        self.user = Subtask.objects.create(title='test', done='false')        
+        self.user = Subtask.objects.create(title='test', done='false')
 
     def test_todo_get(self):
         client = Client()

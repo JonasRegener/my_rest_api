@@ -10,7 +10,7 @@ Dafür gebe den command pip install -r requirements.txt ein.
 Um das Backend in einer Frontend Applikation zu implementieren muss folgende API im Frontend integriert werden.
 Folgender Code muss noch für eigene Zwecke entsprechend angepasst werden
 
-
+Local oder alternativ mit https://jonas34.pythonanywhere.com/ ersetzen WICHTIG HTTPS!!!
 URLS
 
 http://127.0.0.1:8000/todos/
