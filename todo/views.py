@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from django.core import serializers
-from .models import Todo, Subtask
-from .serializers import TodoSerializer, SubtaskSerializer
+from .models import Todo, Subtask, Category
+from .serializers import TodoSerializer, SubtaskSerializer, CategorySerializer
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 import json
@@ -28,23 +28,9 @@ def create(self, request):
         serzialized_obj = serializers.serialize('json', [todo, ])
         return HttpResponse(serzialized_obj, content_type='application/json')
     if request.method == 'POST':
-        new_todo = Todo.objects.create(title=request.POST['title'], description=request.POST['description'], category=request.POST['category'], priority=request.POST['priority'], user=request.POST['user'],due_date=request.POST['due_date'],status=request.POST['status'], subtasks=request.POST['title'])
+        new_todo = Todo.objects.create(title=request.POST['title'], description=request.POST['description'], categories=request.POST['categories'], priority=request.POST['priority'], user=request.POST['user'],due_date=request.POST['due_date'],status=request.POST['status'], subtasks=request.POST['title'])
         new_todo.save()
 
-def update(self, instance, validated_data):
-        subtasks_data = validated_data.pop('subtasks')
-        instance = super(TodoSerializer, self).update(instance, validated_data)
-
-        for subtask_data in subtasks_data:
-            subtasks_qs = Subtask.objects.filter(name__iexact=subtask_data['title'])
-
-            if subtasks_qs.exists():
-                subtasks = subtasks_qs.first()
-            else: subtasks = Subtask.objects.create(**subtask_data)
-
-            instance.subtasks.add(subtasks)
-        
-        return instance
 
 
 class SubtaskViewSet(viewsets.ModelViewSet): 
@@ -53,7 +39,21 @@ class SubtaskViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         subtask = Subtask.objects.create(title = request.POST.get('title', ''),
+        done = request.POST.get('done', 'false'),
         )
         serzialized_subtask = serializers.serialize('json', [subtask, ])
         return HttpResponse(serzialized_subtask, content_type='application/json')
+    
+
+
+class CategoryViewSet(viewsets.ModelViewSet): 
+    queryset = Category.objects.all().order_by('-title')
+    serializer_class = CategorySerializer
+
+    def create(self, request):
+        category = Category.objects.create(title = request.POST.get('title', ''),
+                                            color = request.POST.get('color', '')
+        )
+        serzialized_category = serializers.serialize('json', [category, ])
+        return HttpResponse(serzialized_category, content_type='application/json')
         

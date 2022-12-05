@@ -5,21 +5,16 @@ from django.contrib.auth.models import User
 from datetime import date, timedelta
 
 
-    
+class Category(models.Model):
+    title = models.CharField(max_length=30)
+    color = models.CharField(max_length=30)
 
 class Subtask(models.Model):
     title = models.CharField(max_length=30)
+    done = models.CharField(max_length=30, default='False')
 
 
 class Todo(models.Model):
-    TODO_CATEGORY_CHOICES = [
-    ('M', 'Media'),
-    ('D', 'Design'),
-    ('MA', 'Marketing'),
-    ('B', 'Backoffice'),
-    ('S', 'Sales'),
-    ('-', 'None')
-]
     PRIO_CATEGORY_CHOICES = [
     ('H', 'High'),
     ('M', 'Medium'),
@@ -29,11 +24,12 @@ class Todo(models.Model):
     ('1', 'To do'),
     ('2', 'In progress'),
     ('3', 'Awaiting Feedback'),
-    ('4', 'Done')
+    ('4', 'Done'),
+    ('5', 'Deleted')
 ]
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=300)
-    category = models.CharField(max_length=10,choices=TODO_CATEGORY_CHOICES, default='None')
+    categories = models.ManyToManyField(Category, default=None)
     priority = models.CharField(max_length=15,choices=PRIO_CATEGORY_CHOICES, default='Low')
     user = models.CharField(max_length=120, default='None')
     due_date = models.CharField(max_length=10, default='01-01-2000')

@@ -78,6 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'todolist_api.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL=True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 # Database'
@@ -142,3 +143,10 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DATE_INPUT_FORMATS': ['%m/%d/%Y'],
 }
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:5500',
+    'http://hostname.example.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:9000'
+]
