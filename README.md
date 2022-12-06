@@ -184,7 +184,7 @@ async function updateTodo() {
         ]
     });
     console.log(data)
-    fetch('http://127.0.0.1:8000/todos/', {
+    fetch('http://127.0.0.1:8000/todos/1/', {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
