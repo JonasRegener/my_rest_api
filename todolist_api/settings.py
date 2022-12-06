@@ -141,7 +141,7 @@ STATIC_ROOT = '/home/jonas34/todolist_api/static'
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-    'DATE_INPUT_FORMATS': ['%m/%d/%Y'],
+    'DATE_INPUT_FORMATS': ['%d/%m/%Y'],
 }
 
 CORS_ORIGIN_WHITELIST = [

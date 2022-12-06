@@ -62,3 +62,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
             )
         serzialized_category = serializers.serialize('json', [category, ])
         return HttpResponse(serzialized_category, content_type='application/json')
+
+
+

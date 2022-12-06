@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from datetime import date, timedelta
-
+from rest_framework.fields import ListField
 
 class Category(models.Model):
     """ Many to Many - Model for Todo"""
@@ -33,9 +33,15 @@ class Todo(models.Model):
     ]
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=300)
-    categories = models.ManyToManyField(Category, default=None)
+    categories = models.ManyToManyField(Category, default=None, related_name='categories')
     priority = models.CharField(max_length=15, choices=PRIO_CATEGORY_CHOICES, default='Low')
     user = models.CharField(max_length=120, default='None')
     due_date = models.DateField(max_length=10, default='01-01-2000')
     status = models.CharField(max_length=17, choices=STATUS_CATEGORY_CHOICES, default='To do')
-    subtasks = models.ManyToManyField(Subtask, default=None)
+    subtasks = models.ManyToManyField(Subtask, default=None, related_name='subtasks')
+
+
+
+
+
+
